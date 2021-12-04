@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <ngx-charts-bar-vertical-stacked
-        [view]="[1200, 600]"
+        [view]="[1050, 600]"
         [scheme]="colorScheme"
         [results]="graphData"
         [gradient]="gradient"
@@ -19,21 +19,22 @@
     </div>
   </div>
   <div class="row">
-    <div class="col"></div>
+    <div class="col">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th *ngFor="let stat of stats; index as i">Day {{ i + 1 }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td *ngFor="let stat of stats">{{ stat.PlannedTotal }}</td>
+          </tr>
+          <tr>
+            <td *ngFor="let stat of stats">{{ stat.CompletedTotal }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-<table class="table table-sm">
-  <thead>
-    <tr>
-      <th *ngFor="let stat of stats; index as i">Day {{ i + 1 }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td *ngFor="let stat of stats">{{ stat.PlannedTotal }}</td>
-    </tr>
-    <tr>
-      <td *ngFor="let stat of stats">{{ stat.CompletedTotal }}</td>
-    </tr>
-  </tbody>
-</table>
