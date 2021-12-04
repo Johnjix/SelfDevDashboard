@@ -22,7 +22,7 @@
                 class="btn btn-primary btn-sm float-right"
                 (click)="editGoal = !editGoal"
               >
-                <i class="fas fa-edit"></i>
+                <i class="fas" [ngClass]="editGoal ? 'fa-save' : 'fa-edit'"></i>
               </button>
             </div>
           </div>
@@ -51,30 +51,127 @@
   <div class="row">
     <div class="col">
       <div class="card">
-        <div class="card-header"><b>Backlog</b></div>
-        <div class="card-body"></div>
+        <div class="card-header">
+          <b>Backlog</b>
+          <button
+            class="btn btn-primary btn-sm float-right"
+            (click)="openUpdateTaskModal(null, true, backlog)"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        <mat-expansion-panel *ngFor="let task of backlog">
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ task.Name }} </mat-panel-title>
+            <mat-panel-description>
+              {{ task.ActualHours }}/{{ task.PlannedHours
+              }}<i class="fas fa-hourglass-half ml-1"></i>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col">
+              <p>{{ task.Description }}</p>
+            </div>
+            <div class="col-2">
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="openUpdateTaskModal(task, false, backlog)"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <div
+          *ngIf="backlog.length == 0"
+          class="card-body d-flex justify-content-center"
+        >
+          Empty
+        </div>
       </div>
     </div>
     <div class="col">
       <div class="card">
-        <div class="card-header"><b>Planned</b></div>
+        <div class="card-header">
+          <b>Planned</b>
+          <button
+            class="btn btn-primary btn-sm float-right"
+            (click)="openUpdateTaskModal(null, true, planned)"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
         <mat-accordion>
-          <mat-expansion-panel>
+          <mat-expansion-panel *ngFor="let task of planned">
             <mat-expansion-panel-header>
-              <mat-panel-title> This is the expansion title </mat-panel-title>
+              <mat-panel-title> {{ task.Name }} </mat-panel-title>
               <mat-panel-description>
-                This is a summary of the content
+                {{ task.ActualHours }}/{{ task.PlannedHours
+                }}<i class="fas fa-hourglass-half ml-1"></i>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <p>This is the primary content of the panel.</p>
+            <div class="row">
+              <div class="col">
+                <p>{{ task.Description }}</p>
+              </div>
+              <div class="col-2">
+                <button
+                  class="btn btn-primary btn-sm"
+                  (click)="openUpdateTaskModal(task, false, planned)"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
           </mat-expansion-panel>
         </mat-accordion>
+        <div
+          *ngIf="planned.length == 0"
+          class="card-body d-flex justify-content-center"
+        >
+          Empty
+        </div>
       </div>
     </div>
     <div class="col">
       <div class="card">
-        <div class="card-header"><b>Completed</b></div>
-        <div class="card-body"></div>
+        <div class="card-header">
+          <b>Completed</b>
+          <button
+            class="btn btn-primary btn-sm float-right"
+            (click)="openUpdateTaskModal(null, true, completed)"
+          >
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
+        <mat-expansion-panel *ngFor="let task of completed">
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ task.Name }} </mat-panel-title>
+            <mat-panel-description>
+              {{ task.ActualHours }}/{{ task.PlannedHours
+              }}<i class="fas fa-hourglass-half ml-1"></i>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col">
+              <p>{{ task.Description }}</p>
+            </div>
+            <div class="col-2">
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="openUpdateTaskModal(task, false, completed)"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+          </div>
+        </mat-expansion-panel>
+        <div
+          *ngIf="completed.length == 0"
+          class="card-body d-flex justify-content-center"
+        >
+          Empty
+        </div>
       </div>
     </div>
   </div>

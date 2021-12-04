@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
+import { TaskUpdateModalComponent } from './task-update-modal/task-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
     DashboardComponent,
     DashboardCommunityComponent,
     DashboardUserComponent,
+    TaskUpdateModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,97 @@
+<div class="modal-header">
+  <b>{{ addMode ? "Add Task" : "Update Task: " }} </b>
+  <span *ngIf="!addMode">{{ task.Name }}</span>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="_activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Name</div>
+    </div>
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Enter Task Name"
+      [(ngModel)]="task.Name"
+    />
+  </div>
+  <textarea
+    class="form-control mb-2"
+    type="text"
+    placeholder="Enter Task Description"
+    [(ngModel)]="task.Description"
+  ></textarea>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Planned Hours</div>
+    </div>
+    <input
+      class="form-control"
+      type="number"
+      min="0"
+      placeholder="Enter Estimated Hours"
+      [(ngModel)]="task.PlannedHours"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Actual Hours</div>
+    </div>
+    <input
+      class="form-control"
+      type="number"
+      placeholder="Enter Actual Hours"
+      [(ngModel)]="task.ActualHours"
+    />
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="_activeModal.close(task)"
+  >
+    Save
+  </button>
+</div>
+
+<!-- <div class="input-group mb-2">
+  <div class="input-group-prepend">
+      <div class="input-group-text">
+          Name
+      </div>
+  </div>
+  <input class="form-control" type="text" placeholder="Enter Name" [(ngModel)]="task.Name">
+</div>
+<div class="input-group mb-2">
+  <div class="input-group-prepend">
+      <div class="input-group-text">
+          Description
+      </div>
+  </div>
+  <textarea class="form-control" type="text" placeholder="Enter Description" [(ngModel)]="task.Description">
+</div>
+<div class="input-group mb-2">
+  <div class="input-group-prepend">
+      <div class="input-group-text">
+          Planned Hours
+      </div>
+  </div>
+  <input class="form-control" type="number" placeholder="Enter Estimated Hours" [(ngModel)]="task.PlannedHours">
+</div>
+<div class="input-group mb-2">
+  <div class="input-group-prepend">
+      <div class="input-group-text">
+          Actual Hours
+      </div>
+  </div>
+  <input class="form-control" type="number" placeholder="Enter Actual Hours" [(ngModel)]="task.ActualHours">
+</div> -->

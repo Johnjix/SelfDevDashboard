@@ -4,8 +4,8 @@ export interface DashboardData {
 export interface Task {
   Name: string;
   Description: string;
-  StartDate?: Date;
-  EndDate?: Date;
+  PlannedHours: number;
+  ActualHours: number;
   Completed: boolean;
 }
 export interface Goal {
