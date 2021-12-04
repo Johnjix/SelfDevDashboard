@@ -25,7 +25,7 @@
 <table class="table table-sm">
   <thead>
     <tr>
-      <th *ngFor="let stat of stats">{{ stat.Day }}</th>
+      <th *ngFor="let stat of stats; index as i">Day {{ i + 1 }}</th>
     </tr>
   </thead>
   <tbody>
