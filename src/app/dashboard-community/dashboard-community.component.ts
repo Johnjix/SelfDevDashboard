@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LegendPosition } from '@swimlane/ngx-charts';
 import { CommunityStatistics } from '../models/dashboard-stats.model';
 
 @Component({
@@ -22,6 +23,7 @@ export class DashboardCommunityComponent implements OnInit {
   colorScheme: any = {
     domain: ['#64DD17', '#B0BEC5'],
   };
+  below = LegendPosition.Below;
   constructor() {
     this.stats = [];
     this.graphData = [];
