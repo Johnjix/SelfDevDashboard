@@ -24,15 +24,18 @@
       <table class="table table-sm">
         <thead>
           <tr>
+            <th></th>
             <th *ngFor="let stat of stats; index as i">Day {{ i + 1 }}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td *ngFor="let stat of stats">{{ stat.PlannedTotal }}</td>
+            <td><b>Completed</b></td>
+            <td *ngFor="let stat of stats">{{ stat.CompletedTotal }}</td>
           </tr>
           <tr>
-            <td *ngFor="let stat of stats">{{ stat.CompletedTotal }}</td>
+            <td><b>Planned</b></td>
+            <td *ngFor="let stat of stats">{{ stat.PlannedTotal }}</td>
           </tr>
         </tbody>
       </table>

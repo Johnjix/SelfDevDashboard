@@ -47,12 +47,15 @@ export class DashboardCommunityComponent implements OnInit {
         name: stat.Day,
         series: [
           {
-            name: 'Planned',
-            value: stat.PlannedTotal,
-          },
-          {
             name: 'Completed',
             value: stat.CompletedTotal,
+          },
+          {
+            name: 'Planned',
+            value:
+              stat.PlannedTotal - stat.CompletedTotal > 0
+                ? stat.PlannedTotal - stat.CompletedTotal
+                : 0,
           },
         ],
       });
