@@ -7,7 +7,9 @@
             <div class="col">
               <div class="input-group">
                 Main Goal:
-                <span [hidden]="editGoal">{{ user.Goals.Name }}</span>
+                <span class="ml-1" [hidden]="editGoal">{{
+                  user.Goals.Name
+                }}</span>
                 <input
                   [hidden]="!editGoal"
                   class="form-control"
@@ -43,12 +45,15 @@
         <mat-divider inset></mat-divider>
         <mat-card-actions> </mat-card-actions>
         <mat-card-footer>
-          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="calcProgress()"
+          ></mat-progress-bar>
         </mat-card-footer>
       </mat-card>
     </div>
   </div>
-  <div class="row">
+  <div cdkDropListGroup class="row">
     <div class="col">
       <div class="card">
         <div class="card-header">
@@ -60,49 +65,14 @@
             <i class="fas fa-plus"></i>
           </button>
         </div>
-        <mat-expansion-panel *ngFor="let task of backlog">
-          <mat-expansion-panel-header>
-            <mat-panel-title> {{ task.Name }} </mat-panel-title>
-            <mat-panel-description>
-              {{ task.ActualHours }}/{{ task.PlannedHours
-              }}<i class="fas fa-hourglass-half ml-1"></i>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row">
-            <div class="col">
-              <p>{{ task.Description }}</p>
-            </div>
-            <div class="col-2">
-              <button
-                class="btn btn-primary btn-sm"
-                (click)="openUpdateTaskModal(task, false, backlog)"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-            </div>
-          </div>
-        </mat-expansion-panel>
         <div
-          *ngIf="backlog.length == 0"
-          class="card-body d-flex justify-content-center"
+          class="list-height"
+          cdkDropList
+          [cdkDropListData]="backlog"
+          (cdkDropListDropped)="drop($event)"
         >
-          Empty
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header">
-          <b>Planned</b>
-          <button
-            class="btn btn-primary btn-sm float-right"
-            (click)="openUpdateTaskModal(null, true, planned)"
-          >
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-        <mat-accordion>
-          <mat-expansion-panel *ngFor="let task of planned">
+          <mat-expansion-panel *ngFor="let task of backlog" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <mat-expansion-panel-header>
               <mat-panel-title> {{ task.Name }} </mat-panel-title>
               <mat-panel-description>
@@ -117,60 +87,89 @@
               <div class="col-2">
                 <button
                   class="btn btn-primary btn-sm"
-                  (click)="openUpdateTaskModal(task, false, planned)"
+                  (click)="openUpdateTaskModal(task, false, backlog)"
                 >
                   <i class="fas fa-edit"></i>
                 </button>
               </div>
             </div>
           </mat-expansion-panel>
-        </mat-accordion>
-        <div
-          *ngIf="planned.length == 0"
-          class="card-body d-flex justify-content-center"
-        >
-          Empty
         </div>
       </div>
     </div>
     <div class="col">
       <div class="card">
-        <div class="card-header">
-          <b>Completed</b>
-          <button
-            class="btn btn-primary btn-sm float-right"
-            (click)="openUpdateTaskModal(null, true, completed)"
-          >
-            <i class="fas fa-plus"></i>
-          </button>
+        <div class="card-header header-padding">
+          <b>Planned</b>
         </div>
-        <mat-expansion-panel *ngFor="let task of completed">
-          <mat-expansion-panel-header>
-            <mat-panel-title> {{ task.Name }} </mat-panel-title>
-            <mat-panel-description>
-              {{ task.ActualHours }}/{{ task.PlannedHours
-              }}<i class="fas fa-hourglass-half ml-1"></i>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="row">
-            <div class="col">
-              <p>{{ task.Description }}</p>
-            </div>
-            <div class="col-2">
-              <button
-                class="btn btn-primary btn-sm"
-                (click)="openUpdateTaskModal(task, false, completed)"
-              >
-                <i class="fas fa-edit"></i>
-              </button>
-            </div>
-          </div>
-        </mat-expansion-panel>
         <div
-          *ngIf="completed.length == 0"
-          class="card-body d-flex justify-content-center"
+          class="list-height"
+          cdkDropList
+          [cdkDropListData]="planned"
+          (cdkDropListDropped)="drop($event)"
         >
-          Empty
+          <mat-accordion>
+            <mat-expansion-panel *ngFor="let task of planned" cdkDrag>
+              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+              <mat-expansion-panel-header>
+                <mat-panel-title> {{ task.Name }} </mat-panel-title>
+                <mat-panel-description>
+                  {{ task.ActualHours }}/{{ task.PlannedHours
+                  }}<i class="fas fa-hourglass-half ml-1"></i>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="row">
+                <div class="col">
+                  <p>{{ task.Description }}</p>
+                </div>
+                <div class="col-2">
+                  <button
+                    class="btn btn-primary btn-sm"
+                    (click)="openUpdateTaskModal(task, false, planned)"
+                  >
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </div>
+              </div>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header header-padding">
+          <b>Completed</b>
+        </div>
+        <div
+          class="list-height"
+          cdkDropList
+          [cdkDropListData]="completed"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <mat-expansion-panel *ngFor="let task of completed" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <mat-expansion-panel-header>
+              <mat-panel-title> {{ task.Name }} </mat-panel-title>
+              <mat-panel-description>
+                {{ task.ActualHours }}/{{ task.PlannedHours
+                }}<i class="fas fa-hourglass-half ml-1"></i>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="row">
+              <div class="col">
+                <p>{{ task.Description }}</p>
+              </div>
+              <div class="col-2">
+                <button
+                  class="btn btn-primary btn-sm"
+                  (click)="openUpdateTaskModal(task, false, completed)"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+              </div>
+            </div>
+          </mat-expansion-panel>
         </div>
       </div>
     </div>

@@ -1,3 +1,8 @@
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { User, Task } from '../models/dashboard-stats.model';
@@ -19,8 +24,9 @@ export class DashboardUserComponent implements OnInit {
     this.user = {
       Name: 'Toast 🍞',
       Goals: {
-        Name: '',
-        Description: '',
+        Name: 'Build a Dashboard',
+        Description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         Tasks: [],
         StartDate: null,
         CompletedDate: null,
@@ -28,13 +34,51 @@ export class DashboardUserComponent implements OnInit {
     };
     this.editGoal = false;
 
-    this.backlog = [];
-    this.planned = [];
+    this.backlog = [
+      {
+        Name: 'Testing',
+        Description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        PlannedHours: 10,
+        ActualHours: 4,
+        Completed: false,
+      },
+      {
+        Name: 'Build User Dashboard',
+        Description: 'Testing testing',
+        PlannedHours: 4,
+        ActualHours: 1,
+        Completed: false,
+      },
+      {
+        Name: 'Add Drag and Drop',
+        Description: 'Drag and drop bruh',
+        PlannedHours: 2,
+        ActualHours: 7,
+        Completed: false,
+      },
+    ];
+    this.planned = [
+      {
+        Name: 'Build UI Skeleton',
+        Description: 'Add the grid',
+        PlannedHours: 10,
+        ActualHours: 1,
+        Completed: false,
+      },
+    ];
     this.completed = [];
   }
 
   ngOnInit(): void {}
+  calcProgress(): number {
+    let backlogLength: number = this.backlog.length;
+    let plannedLength: number = this.planned.length;
+    let completedLength: number = this.completed.length;
+    let total: number = backlogLength + plannedLength + completedLength;
 
+    return (completedLength / total) * 100;
+  }
   openUpdateTaskModal(
     task: Task | null,
     addMode: boolean = false,
@@ -69,5 +113,22 @@ export class DashboardUserComponent implements OnInit {
         // Rejected, do nothing
       }
     );
+  }
+
+  drop(event: CdkDragDrop<Task[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
   }
 }

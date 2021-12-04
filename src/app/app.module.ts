@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { TaskUpdateModalComponent } from './task-update-modal/task-update-modal.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TaskUpdateModalComponent } from './task-update-modal/task-update-modal.
     MatCardModule,
     MatProgressBarModule,
     MatDividerModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
