@@ -8,8 +8,23 @@ import { CommunityStatistics } from '../models/dashboard-stats.model';
 })
 export class DashboardCommunityComponent implements OnInit {
   stats: CommunityStatistics[];
+  graphData: any[];
+  // options
+  showXAxis: boolean = true;
+  showYAxis: boolean = true;
+  gradient: boolean = false;
+  showLegend: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Date';
+  showYAxisLabel: boolean = true;
+  yAxisLabel: string = 'Progress';
+  animations: boolean = true;
+  colorScheme: any = {
+    domain: ['#64DD17', '#B0BEC5'],
+  };
   constructor() {
     this.stats = [];
+    this.graphData = [];
   }
 
   ngOnInit(): void {
@@ -23,5 +38,22 @@ export class DashboardCommunityComponent implements OnInit {
 
       this.stats.push(stat);
     }
+
+    // Transform for Graph
+    this.stats.forEach((stat) => {
+      this.graphData.push({
+        name: stat.Day,
+        series: [
+          {
+            name: 'Planned',
+            value: stat.PlannedTotal,
+          },
+          {
+            name: 'Completed',
+            value: stat.CompletedTotal,
+          },
+        ],
+      });
+    });
   }
 }

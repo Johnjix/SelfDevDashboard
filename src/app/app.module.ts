@@ -15,6 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { TaskUpdateModalComponent } from './task-update-modal/task-update-modal.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatProgressBarModule,
     MatDividerModule,
     DragDropModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

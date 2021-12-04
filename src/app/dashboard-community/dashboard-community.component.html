@@ -1,3 +1,39 @@
-<div>
-  {{ stats | json }}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <ngx-charts-bar-vertical-stacked
+        [view]="[1200, 600]"
+        [scheme]="colorScheme"
+        [results]="graphData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [animations]="animations"
+      >
+      </ngx-charts-bar-vertical-stacked>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+  </div>
 </div>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th *ngFor="let stat of stats">{{ stat.Day }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td *ngFor="let stat of stats">{{ stat.PlannedTotal }}</td>
+    </tr>
+    <tr>
+      <td *ngFor="let stat of stats">{{ stat.CompletedTotal }}</td>
+    </tr>
+  </tbody>
+</table>
