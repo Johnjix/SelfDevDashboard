@@ -1,1 +1,81 @@
-<p>dashboard-user works!</p>
+<div class="container-fluid">
+  <div class="row mt-2 mb-2">
+    <div class="col">
+      <mat-card>
+        <mat-card-title>
+          <div class="row">
+            <div class="col">
+              <div class="input-group">
+                Main Goal:
+                <span [hidden]="editGoal">{{ user.Goals.Name }}</span>
+                <input
+                  [hidden]="!editGoal"
+                  class="form-control"
+                  type="text"
+                  placeholder="Enter Goal Name"
+                  [(ngModel)]="user.Goals.Name"
+                />
+              </div>
+            </div>
+            <div class="col-1">
+              <button
+                class="btn btn-primary btn-sm float-right"
+                (click)="editGoal = !editGoal"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+          </div>
+        </mat-card-title>
+        <mat-card-content>
+          <p [hidden]="editGoal">
+            {{ user.Goals.Description }}
+          </p>
+          <textarea
+            [hidden]="!editGoal"
+            class="form-control"
+            name="goalDescription"
+            id="goalDescription"
+            placeholder="Enter Description"
+            [(ngModel)]="user.Goals.Description"
+          ></textarea>
+        </mat-card-content>
+        <mat-divider inset></mat-divider>
+        <mat-card-actions> </mat-card-actions>
+        <mat-card-footer>
+          <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header"><b>Backlog</b></div>
+        <div class="card-body"></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header"><b>Planned</b></div>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> This is the expansion title </mat-panel-title>
+              <mat-panel-description>
+                This is a summary of the content
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>This is the primary content of the panel.</p>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header"><b>Completed</b></div>
+        <div class="card-body"></div>
+      </div>
+    </div>
+  </div>
+</div>
