@@ -19,3 +19,8 @@ export interface User {
   Name: string;
   Goals: Goal;
 }
+export interface CommunityStatistics {
+  Day: string;
+  PlannedTotal: number;
+  CompletedTotal: number;
+}
