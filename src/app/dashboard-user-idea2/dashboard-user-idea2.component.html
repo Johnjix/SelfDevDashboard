@@ -1,68 +1,147 @@
-<div class="row mt-1">
-  <div class="col">
-    <table class="table table-sm table-striped">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Goal (Planned)</th>
-          <th>Done</th>
-          <th>Journal</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let entry of userData.TableEntry">
-          <td>{{ entry.Date }}</td>
-          <td>{{ entry.Planned }}</td>
-          <td>{{ entry.Completed }}</td>
-          <td>
-            <span *ngIf="!entry.EditMode">{{ entry.Journal }}</span>
-            <textarea
-              *ngIf="entry.EditMode"
-              class="form-control"
-              name="journalEntry"
-              id="journalEntry"
-              [(ngModel)]="entry.Journal"
-            ></textarea>
-          </td>
-          <td>
-            <button
-              ngbTooltip="{{ entry.EditMode ? 'Save ' : 'Edit ' }} plans for {{
-                entry.Date
-              }}"
-              class="btn btn-sm mr-1"
-              [ngClass]="entry.EditMode ? 'btn-success' : 'btn-primary'"
-              (click)="entry.EditMode = !entry.EditMode"
+<div class="container-fluid">
+  <div class="row mt-1">
+    <div class="col">
+      <div class="card" style="height: 89vh; overflow: auto">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Goal (Planned)</th>
+              <th>Done</th>
+              <th>Journal</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let entry of userData.TableEntry; index as i"
+              class="table-row"
             >
-              <i
-                class="fas fa-edit"
-                [ngClass]="entry.EditMode ? 'fa-save' : 'fa-edit'"
-              ></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="col">
-    <div class="card">
-      <div class="card-header">
-        <b>My Goal: {{ userData.Goal }}</b>
+              <td>{{ entry.Date }}</td>
+              <td>
+                <span *ngIf="!entry.EditMode">{{ entry.Planned }}</span>
+                <input
+                  *ngIf="entry.EditMode"
+                  class="form-control"
+                  type="number"
+                  [(ngModel)]="graphData[1].series[i].value"
+                  (ngModelChange)="
+                    updateChart('planned', entry, graphData[1].series[i].value)
+                  "
+                />
+              </td>
+              <td>
+                <span *ngIf="!entry.EditMode">{{ entry.Completed }}</span>
+                <input
+                  *ngIf="entry.EditMode"
+                  class="form-control"
+                  type="number"
+                  [(ngModel)]="graphData[0].series[i].value"
+                  (ngModelChange)="
+                    updateChart(
+                      'completed',
+                      entry,
+                      graphData[0].series[i].value
+                    )
+                  "
+                />
+              </td>
+              <td>
+                <span *ngIf="!entry.EditMode">{{ entry.Journal }}</span>
+                <textarea
+                  *ngIf="entry.EditMode"
+                  class="form-control"
+                  name="journalEntry"
+                  id="journalEntry"
+                  [(ngModel)]="entry.Journal"
+                ></textarea>
+              </td>
+              <td>
+                <button
+                  ngbTooltip="{{
+                    entry.EditMode ? 'Save ' : 'Edit '
+                  }} plans for {{ entry.Date }}"
+                  class="btn btn-sm mr-1"
+                  [ngClass]="entry.EditMode ? 'btn-success' : 'btn-primary'"
+                  (click)="entry.EditMode = !entry.EditMode"
+                >
+                  <i
+                    class="fas fa-edit"
+                    [ngClass]="entry.EditMode ? 'fa-save' : 'fa-edit'"
+                  ></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="card-body">
-        <ngx-charts-line-chart
-          [scheme]="colorScheme"
-          [legend]="true"
-          [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel"
-          [xAxis]="true"
-          [yAxis]="true"
-          [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="yAxisLabel"
-          [timeline]="true"
-          [results]="graphData"
-        >
-        </ngx-charts-line-chart>
+    </div>
+    <div class="col">
+      <div class="row mb-2">
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              <span [hidden]="editGoal"
+                ><b>My Goal: {{ userData.Goal }}</b></span
+              >
+              <div [hidden]="!editGoal" class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">My Goal</div>
+                </div>
+                <input
+                  class="form-control"
+                  type="text"
+                  placeholder="Add Goal"
+                  [(ngModel)]="userData.Goal"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-success btn-sm"
+                    (click)="editGoal = !editGoal"
+                  >
+                    <i class="fas fa-save"></i>
+                  </button>
+                </div>
+              </div>
+              <button
+                [hidden]="editGoal"
+                class="btn btn-primary btn-sm float-right"
+                (click)="editGoal = !editGoal"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <ngx-charts-line-chart
+                [view]="[900, 350]"
+                [scheme]="colorScheme"
+                [legend]="true"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxis]="true"
+                [yAxis]="true"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                [timeline]="true"
+                [results]="graphData"
+              >
+              </ngx-charts-line-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header"><b>Scratch Board</b></div>
+            <quill-editor
+              theme="snow"
+              [modules]="modules"
+              [sanitize]="true"
+              [(ngModel)]="userData.Scratchboard"
+            ></quill-editor>
+          </div>
+        </div>
       </div>
     </div>
   </div>

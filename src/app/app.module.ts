@@ -17,6 +17,7 @@ import { TaskUpdateModalComponent } from './task-update-modal/task-update-modal.
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardUserIdea2Component } from './dashboard-user-idea2/dashboard-user-idea2.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { DashboardUserIdea2Component } from './dashboard-user-idea2/dashboard-us
     MatDividerModule,
     DragDropModule,
     NgxChartsModule,
+    QuillModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

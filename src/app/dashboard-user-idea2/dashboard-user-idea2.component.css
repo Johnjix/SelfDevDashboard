@@ -1,0 +1,9 @@
+.table-row:hover {
+  border-right: solid 5px #673ab7 !important;
+  border-left: solid 6px #673ab7 !important;
+}
+thead {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
