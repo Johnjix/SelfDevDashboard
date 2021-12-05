@@ -93,7 +93,17 @@ export class DashboardUserIdea2Component implements OnInit {
       this.graphData[1].series.push(seriesDataPlannedEntry);
       this.graphData[0].series.push(seriesDataCompletedEntry);
     }
-    console.log(this.graphData[1].series[0]);
+
+    // More Mock data
+    this.userData.Goal = 'Creating Dashboard Idea 2 from Excel Spreadsheet';
+    this.userData.TableEntry[0].Journal =
+      'Added New UI idea to a tab, added WYSIWYG editor for scratch board, changed chart to line chart';
+    this.userData.TableEntry[1].Journal =
+      'Find out how to host back end for free';
+    this.userData.TableEntry[2].Journal = 'Solve a mystery';
+    this.userData.TableEntry[3].Journal = 'Lead a rebellion';
+    this.userData.TableEntry[4].Journal = 'Profit';
+    this.userData.TableEntry[5].Journal = '?????????';
   }
 
   updateChart(mode: string, entry: TableEntry, value: number): void {
@@ -106,9 +116,9 @@ export class DashboardUserIdea2Component implements OnInit {
   }
 }
 export interface UserDashboard2Model {
-  Goal: '';
+  Goal: string;
   TableEntry: TableEntry[];
-  Scratchboard: '';
+  Scratchboard: string;
 }
 export interface TableEntry {
   Date: string;
