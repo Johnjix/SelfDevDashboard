@@ -1,0 +1,69 @@
+<div class="row mt-1">
+  <div class="col">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Goal (Planned)</th>
+          <th>Done</th>
+          <th>Journal</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of userData.TableEntry">
+          <td>{{ entry.Date }}</td>
+          <td>{{ entry.Planned }}</td>
+          <td>{{ entry.Completed }}</td>
+          <td>
+            <span *ngIf="!entry.EditMode">{{ entry.Journal }}</span>
+            <textarea
+              *ngIf="entry.EditMode"
+              class="form-control"
+              name="journalEntry"
+              id="journalEntry"
+              [(ngModel)]="entry.Journal"
+            ></textarea>
+          </td>
+          <td>
+            <button
+              ngbTooltip="{{ entry.EditMode ? 'Save ' : 'Edit ' }} plans for {{
+                entry.Date
+              }}"
+              class="btn btn-sm mr-1"
+              [ngClass]="entry.EditMode ? 'btn-success' : 'btn-primary'"
+              (click)="entry.EditMode = !entry.EditMode"
+            >
+              <i
+                class="fas fa-edit"
+                [ngClass]="entry.EditMode ? 'fa-save' : 'fa-edit'"
+              ></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <b>My Goal: {{ userData.Goal }}</b>
+      </div>
+      <div class="card-body">
+        <ngx-charts-line-chart
+          [scheme]="colorScheme"
+          [legend]="true"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxis]="true"
+          [yAxis]="true"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [timeline]="true"
+          [results]="graphData"
+        >
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+  </div>
+</div>

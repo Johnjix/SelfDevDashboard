@@ -16,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { TaskUpdateModalComponent } from './task-update-modal/task-update-modal.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DashboardUserIdea2Component } from './dashboard-user-idea2/dashboard-user-idea2.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DashboardCommunityComponent,
     DashboardUserComponent,
     TaskUpdateModalComponent,
+    DashboardUserIdea2Component,
   ],
   imports: [
     BrowserModule,
