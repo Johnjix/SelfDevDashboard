@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardData, User } from '../models/dashboard-stats.model';
 
 @Component({
   selector: 'app-dashboard',

@@ -18,6 +18,8 @@ export class TaskUpdateModalComponent implements OnInit {
       PlannedHours: 0,
       ActualHours: 0,
       Completed: false,
+      DateStarted: undefined,
+      DateCompleted: undefined,
     };
   }
 

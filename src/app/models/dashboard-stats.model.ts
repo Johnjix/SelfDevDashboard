@@ -7,6 +7,8 @@ export interface Task {
   PlannedHours: number;
   ActualHours: number;
   Completed: boolean;
+  DateStarted?: Date;
+  DateCompleted?: Date;
 }
 export interface Goal {
   Name: string;
