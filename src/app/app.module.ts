@@ -18,6 +18,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardUserIdea2Component } from './dashboard-user-idea2/dashboard-user-idea2.component';
 import { QuillModule } from 'ngx-quill';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { QuillModule } from 'ngx-quill';
     DragDropModule,
     NgxChartsModule,
     QuillModule.forRoot(),
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -19,10 +19,43 @@ export interface Goal {
 }
 export interface User {
   Name: string;
-  Goals: Goal;
+  GoalName: string;
+  GoalStartDate: string;
+  GoalCompletedDate: string;
+  Instagram: string;
+  Linkdin: string;
+  Notes: string;
 }
 export interface CommunityStatistics {
   Day: string;
   PlannedTotal: number;
   CompletedTotal: number;
 }
+
+export const MockData = {
+  user: {
+    id: 99,
+    name: 'long.integer',
+    instagram: 'long.integer',
+    linkedin: 'https://linkedin.com/in/longshong',
+    github: 'https://github.com/longinteger017',
+    homepage: 'https://theselfdev.com/',
+    image_url: 'https://theselfdev.com/user/name',
+  },
+  table: {
+    date: ['01.01.2021', '02.01.2021'],
+    goal: ['1', '2'],
+    done: [],
+    notes: [],
+  },
+  chart: {
+    title: 'creating 4 youtube videos',
+    goal_color: 'blue',
+    done_color: 'red',
+    steps: ['days', 'weeks'],
+  },
+  scratch_board: {
+    formatted_text:
+      '- research topic X\n- writing script\n- writing storyboard\n-defining cinematic scenes....',
+  },
+};

@@ -1,5 +1,17 @@
 <div class="container-fluid">
+  <div *ngIf="user != ''" [mat-menu-trigger-for]="menu" class="user-header">
+    <span><i class="fas fa-user-graduate mr-2"></i>{{ user }}</span>
+  </div>
+  <div *ngIf="user == ''" class="user-header">
+    <i class="fas fa-user-ninja mr-2"></i>Sign in
+  </div>
   <div class="mt-3">
     <app-dashboard></app-dashboard>
   </div>
 </div>
+<!-- User Menu -->
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <i class="fas fa-sign-out-alt mr-2"></i>Sign Out
+  </button>
+</mat-menu>
