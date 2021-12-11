@@ -19,6 +19,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DashboardUserIdea2Component } from './dashboard-user-idea2/dashboard-user-idea2.component';
 import { QuillModule } from 'ngx-quill';
 import { MatMenuModule } from '@angular/material/menu';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,9 @@ import { MatMenuModule } from '@angular/material/menu';
     NgxChartsModule,
     QuillModule.forRoot(),
     MatMenuModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent],

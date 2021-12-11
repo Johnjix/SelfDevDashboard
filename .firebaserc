@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "selfdevdashboard": {
+      "hosting": {
+        "SelfDevDashboard": [
+          "selfdevdashboard"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "selfdevdashboard"
+  }
+}
