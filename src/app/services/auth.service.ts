@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import {} from '@angular/fire/compat/';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  constructor() { }
+  constructor() {}
 }
