@@ -18,13 +18,21 @@ export interface Goal {
   CompletedDate: Date | null;
 }
 export interface User {
-  Name: string;
-  GoalName: string;
-  GoalStartDate: string;
-  GoalCompletedDate: string;
-  Instagram: string;
-  Linkdin: string;
-  Notes: string;
+  // From Google
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  // From Google end
+  GoalName?: string;
+  GoalStartDate?: string;
+  GoalCompletedDate?: string;
+  Instagram?: string;
+  Linkdin?: string;
+  Notes?: string;
+  Name?: string;
+  Github?: string;
+  Twitter?: string;
 }
 export interface CommunityStatistics {
   Day: string;

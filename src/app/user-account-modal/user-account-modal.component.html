@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <b>Update Account Details for {{ user.displayName }} </b>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="_activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Name</div>
+    </div>
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Name"
+      [(ngModel)]="user.Name"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-instagram"></i>
+      </div>
+    </div>
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Instagram"
+      [(ngModel)]="user.Instagram"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-twitter"></i>
+      </div>
+    </div>
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Twitter"
+      [(ngModel)]="user.Twitter"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        <i class="fab fa-github"></i>
+      </div>
+    </div>
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Github"
+      [(ngModel)]="user.Github"
+    />
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="updateUser()">
+    <i class="fas fa-save"></i>
+  </button>
+</div>

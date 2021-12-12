@@ -23,6 +23,11 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import {
+  MatSnackBarModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+} from '@angular/material/snack-bar';
+import { UserAccountModalComponent } from './user-account-modal/user-account-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     DashboardUserComponent,
     TaskUpdateModalComponent,
     DashboardUserIdea2Component,
+    UserAccountModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,8 +57,18 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 10000,
+        panelClass: 'snackbar_default',
+        hasAction: true,
+      },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
