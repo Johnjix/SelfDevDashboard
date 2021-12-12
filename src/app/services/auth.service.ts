@@ -51,7 +51,7 @@ export class AuthService {
     this.openSnackbar(`Sign in success. Ola ${userData.displayName} 🙌`);
     return _userRef.set(userData, { merge: true });
   }
-  updateUserData(user: User) {
+  updateUserData(user: any) {
     const _userRef: AngularFirestoreDocument<User> = this._afDB.doc(
       `users/${user.uid}`
     );

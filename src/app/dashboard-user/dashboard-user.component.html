@@ -6,20 +6,25 @@
           <div class="row">
             <div class="col">
               <div class="input-group">
-                Main Goal:
-                <span class="ml-1" [hidden]="editGoal"></span>
-                <input
-                  [hidden]="!editGoal"
-                  class="form-control"
-                  type="text"
-                  placeholder="Enter Goal Name"
-                />
+                <span [hidden]="editGoal">Main Goal: {{ user.GoalName }}</span>
+                <div [hidden]="!editGoal" class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">Main Goal</div>
+                  </div>
+                  <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter Goal Name"
+                    [(ngModel)]="user.GoalName"
+                  />
+                </div>
               </div>
             </div>
             <div class="col-1">
               <button
-                class="btn btn-primary btn-sm float-right"
-                (click)="editGoal = !editGoal"
+                class="btn btn-sm float-right"
+                [ngClass]="editGoal ? 'btn-success' : 'btn-primary'"
+                (click)="editGoal = !editGoal; updateGoal()"
               >
                 <i class="fas" [ngClass]="editGoal ? 'fa-save' : 'fa-edit'"></i>
               </button>
@@ -27,13 +32,16 @@
           </div>
         </mat-card-title>
         <mat-card-content>
-          <p [hidden]="editGoal"></p>
+          <p [hidden]="editGoal">
+            {{ user.GoalDescription }}
+          </p>
           <textarea
             [hidden]="!editGoal"
             class="form-control"
             name="goalDescription"
             id="goalDescription"
             placeholder="Enter Description"
+            [(ngModel)]="user.GoalDescription"
           ></textarea>
         </mat-card-content>
         <mat-divider inset></mat-divider>

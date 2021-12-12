@@ -3,9 +3,10 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { User, Task } from '../models/dashboard-stats.model';
+import { AuthService } from '../services/auth.service';
 import { TaskUpdateModalComponent } from '../task-update-modal/task-update-modal.component';
 
 @Component({
@@ -14,13 +15,17 @@ import { TaskUpdateModalComponent } from '../task-update-modal/task-update-modal
   styleUrls: ['./dashboard-user.component.css'],
 })
 export class DashboardUserComponent implements OnInit {
-  user: User;
+  @Input() user: User;
+
   editGoal: boolean;
   backlog: Task[];
   planned: Task[];
   completed: Task[];
 
-  constructor(private _modalService: NgbModal) {
+  constructor(
+    private _modalService: NgbModal,
+    private _authService: AuthService
+  ) {
     this.user = {
       // Name: 'Toast 🍞',
       // Goals: {
@@ -113,6 +118,10 @@ export class DashboardUserComponent implements OnInit {
         // Rejected, do nothing
       }
     );
+  }
+
+  updateGoal(): void {
+    this._authService.updateUserData(this.user);
   }
 
   drop(event: CdkDragDrop<Task[]>) {
