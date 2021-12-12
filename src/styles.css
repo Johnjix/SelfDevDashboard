@@ -13,3 +13,9 @@ body {
 .ql-container {
   height: 280px !important;
 }
+
+/* Snackbar */
+.snackbar_default {
+  background-color: #673ab7;
+  color: white;
+}
