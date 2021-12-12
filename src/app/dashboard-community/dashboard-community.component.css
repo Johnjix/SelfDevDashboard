@@ -1,0 +1,4 @@
+.calendar-table {
+  max-height: 800px;
+  overflow: auto;
+}
