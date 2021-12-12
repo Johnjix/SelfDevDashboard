@@ -7,3 +7,7 @@ thead {
   top: 0;
   background-color: white;
 }
+.list-group-max-height {
+  max-height: 370px;
+  overflow: auto;
+}

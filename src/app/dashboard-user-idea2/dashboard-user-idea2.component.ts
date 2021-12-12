@@ -1,14 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, Subscriber, Subscription } from 'rxjs';
+import { Journal, User } from '../models/dashboard-stats.model';
+import { AuthService } from '../services/auth.service';
+import { JournalService } from '../services/journal.service';
+import { UpdateJournalEntryModalComponent } from '../update-journal-entry-modal/update-journal-entry-modal.component';
 
 @Component({
   selector: 'app-dashboard-user-idea2',
   templateUrl: './dashboard-user-idea2.component.html',
   styleUrls: ['./dashboard-user-idea2.component.css'],
 })
-export class DashboardUserIdea2Component implements OnInit {
+export class DashboardUserIdea2Component implements OnInit, OnDestroy {
+  user: User;
   userData: UserDashboard2Model;
+  allUsers$: Observable<User[]>;
   graphData: any[];
   editGoal: boolean;
+  userJournals: Journal[];
+  subs: Subscription[];
+  cachedScratchBoard: string;
   // options
   showXAxis: boolean = true;
   showYAxis: boolean = true;
@@ -46,7 +57,17 @@ export class DashboardUserIdea2Component implements OnInit {
       ['link', 'image'], // link and image, video
     ],
   };
-  constructor() {
+  constructor(
+    private _journalService: JournalService,
+    private _modalService: NgbModal,
+    private _authService: AuthService
+  ) {
+    this.user = {
+      uid: '',
+      email: '',
+      displayName: '',
+      photoURL: '',
+    };
     this.editGoal = false;
     this.userData = {
       Goal: '',
@@ -63,9 +84,32 @@ export class DashboardUserIdea2Component implements OnInit {
         series: [],
       },
     ];
+    this.userJournals = [];
+    this.subs = [];
+    this.cachedScratchBoard = '';
   }
 
   ngOnInit(): void {
+    // Get User
+    const sub1: Subscription = this._authService.user$.subscribe((userData) => {
+      this.user = userData;
+      console.log('user', this.user);
+      this.cachedScratchBoard = this.user.Notes;
+    });
+    // Get all users
+    this.allUsers$ = this._authService.allUsers$;
+    // Get User Journals
+    const sub: Subscription = this._journalService
+      .getUserJournals()
+      .subscribe((journalData) => {
+        this.userJournals = journalData;
+        console.log('user journals', this.userJournals);
+        console.log('journal data', journalData);
+      });
+
+    this.subs.push(sub1);
+    this.subs.push(sub);
+
     let seriesDataPlannedEntry: any;
     let seriesDataCompletedEntry: any;
 
@@ -105,6 +149,15 @@ export class DashboardUserIdea2Component implements OnInit {
     this.userData.TableEntry[4].Journal = 'Profit';
     this.userData.TableEntry[5].Journal = '?????????';
   }
+  ngOnDestroy(): void {
+    this.subs.forEach((sub) => {
+      sub.unsubscribe();
+    });
+  }
+
+  updateScratchBoard(): void {
+    this._authService.updateUserData(this.user);
+  }
 
   updateChart(mode: string, entry: TableEntry, value: number): void {
     this.graphData = [...this.graphData];
@@ -113,6 +166,31 @@ export class DashboardUserIdea2Component implements OnInit {
     } else {
       entry.Completed = value;
     }
+  }
+
+  openCreateJournalEntryModal(): void {
+    let newjournalEntry: Journal = {
+      uid: '',
+      id: '',
+      Day: '',
+      Planned: 0,
+      Completed: 0,
+      Journal: '',
+    };
+
+    const _modalRef: NgbModalRef = this._modalService.open(
+      UpdateJournalEntryModalComponent
+    );
+
+    _modalRef.componentInstance.journalEntry = newjournalEntry;
+  }
+
+  openUpdateJournalEntryModal(journalEntry: Journal): void {
+    const _modalRef: NgbModalRef = this._modalService.open(
+      UpdateJournalEntryModalComponent
+    );
+
+    _modalRef.componentInstance.journalEntry = journalEntry;
   }
 }
 export interface UserDashboard2Model {

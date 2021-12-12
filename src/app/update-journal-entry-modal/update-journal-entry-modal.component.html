@@ -1,0 +1,71 @@
+<div class="modal-header">
+  <b
+    >{{
+      journalEntry.id == "" ? "Add Journal Entry" : "Update Journal Entry: "
+    }}
+  </b>
+  <span *ngIf="journalEntry.id != ''">{{ journalEntry.Day }}</span>
+  <button
+    type="button"
+    class="close"
+    aria-label="Close"
+    (click)="_activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Day</div>
+    </div>
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Enter Planned Day DD/MM/YYYY"
+      [(ngModel)]="journalEntry.Day"
+    />
+  </div>
+
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Planned Hours</div>
+    </div>
+    <input
+      class="form-control"
+      type="number"
+      min="0"
+      placeholder="Enter Estimated Hours"
+      [(ngModel)]="journalEntry.Planned"
+    />
+  </div>
+  <div class="input-group mb-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Completed Hours</div>
+    </div>
+    <input
+      class="form-control"
+      type="number"
+      min="0"
+      placeholder="Enter Completed Hours"
+      [(ngModel)]="journalEntry.Completed"
+    />
+  </div>
+  <textarea
+    class="form-control"
+    type="text"
+    placeholder="Enter Journal Comments"
+    [(ngModel)]="journalEntry.Journal"
+  ></textarea>
+</div>
+
+<div class="modal-footer">
+  <button
+    [disabled]="disableSave()"
+    type="button"
+    class="btn btn-success"
+    (click)="updateJournal()"
+  >
+    <i class="fas fa-save"></i>
+  </button>
+</div>

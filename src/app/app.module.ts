@@ -28,6 +28,8 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
 } from '@angular/material/snack-bar';
 import { UserAccountModalComponent } from './user-account-modal/user-account-modal.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { UpdateJournalEntryModalComponent } from './update-journal-entry-modal/update-journal-entry-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { UserAccountModalComponent } from './user-account-modal/user-account-mod
     TaskUpdateModalComponent,
     DashboardUserIdea2Component,
     UserAccountModalComponent,
+    UpdateJournalEntryModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { UserAccountModalComponent } from './user-account-modal/user-account-mod
     AngularFireAuthModule,
     AngularFirestoreModule,
     MatSnackBarModule,
+    MatChipsModule,
   ],
   providers: [
     {

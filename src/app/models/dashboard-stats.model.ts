@@ -40,6 +40,15 @@ export interface CommunityStatistics {
   PlannedTotal: number;
   CompletedTotal: number;
 }
+export interface Journal {
+  // Dashboard 2
+  uid: string;
+  id?: string;
+  Day?: string;
+  Planned?: number;
+  Completed?: number;
+  Journal?: string;
+}
 
 export const MockData = {
   // user: {
