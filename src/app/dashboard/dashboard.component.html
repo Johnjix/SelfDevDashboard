@@ -1,8 +1,8 @@
 <mat-tab-group>
-  <mat-tab *ngIf="false" label="Community Progress">
+  <mat-tab label="Community Progress">
     <app-dashboard-community></app-dashboard-community>
   </mat-tab>
-  <mat-tab label="User: Toast 🍞">
+  <mat-tab *ngIf="user" label="User Dashboard: {{ user?.Name }}">
     <app-dashboard-user></app-dashboard-user>
   </mat-tab>
   <mat-tab label="User Dashboard Idea 2: Excel-ish">
