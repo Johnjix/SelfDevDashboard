@@ -11,3 +11,6 @@ thead {
   max-height: 370px;
   overflow: auto;
 }
+.current-user {
+  background-color: #ffff8d;
+}

@@ -184,9 +184,12 @@
                   let us of allUsers$ | async | strFilter: filterUsers:'Name'
                 "
                 class="list-group-item"
+                [ngClass]="{ 'current-user': us.uid == user.uid }"
               >
                 <i class="fas fa-user-graduate mr-1"></i>
-                <span class="mr-1">{{ us.Name }}</span>
+                <span class="mr-1">{{
+                  !us.Name || us.Name == "" ? us.displayName : us.Name
+                }}</span>
                 <i
                   *ngIf="us.Instagram && us.Instagram != ''"
                   class="fab fa-instagram mr-1"
