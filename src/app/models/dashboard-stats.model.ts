@@ -34,6 +34,8 @@ export interface User {
   Name?: string;
   Github?: string;
   Twitter?: string;
+  Youtube?: string;
+  Twitch?: string;
 }
 export interface CommunityStatistics {
   Day: string;

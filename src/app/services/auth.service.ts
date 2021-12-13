@@ -49,7 +49,6 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       photoURL: user.photoURL,
-      Notes: user.Notes,
     };
 
     this.openSnackbar(`Sign in success. Ola ${userData.displayName} 🙌`);

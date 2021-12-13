@@ -186,7 +186,32 @@
                 class="list-group-item"
               >
                 <i class="fas fa-user-graduate mr-1"></i>
-                <span>{{ us.Name }}</span>
+                <span class="mr-1">{{ us.Name }}</span>
+                <i
+                  *ngIf="us.Instagram && us.Instagram != ''"
+                  class="fab fa-instagram mr-1"
+                  ngbTooltip="{{ us.Instagram }}"
+                ></i>
+                <i
+                  *ngIf="us.Twitter && us.Twitter != ''"
+                  class="fab fa-twitter mr-1"
+                  ngbTooltip="{{ us.Twitter }}"
+                ></i>
+                <i
+                  *ngIf="us.Github && us.Github != ''"
+                  class="fab fa-github mr-1"
+                  ngbTooltip="{{ us.Github }}"
+                ></i>
+                <i
+                  *ngIf="us.Youtube && us.Youtube != ''"
+                  class="fab fa-youtube mr-1"
+                  ngbTooltip="{{ us.Youtube }}"
+                ></i>
+                <i
+                  *ngIf="us.Twitch && us.Twitch != ''"
+                  class="fab fa-twitch mr-1"
+                  ngbTooltip="{{ us.Twitch }}"
+                ></i>
               </li>
             </ul>
           </div>
