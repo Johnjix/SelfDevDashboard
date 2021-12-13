@@ -95,7 +95,7 @@ export class DashboardUserIdea2Component implements OnInit, OnDestroy {
     // Get User
     const sub1: Subscription = this._authService.user$.subscribe((userData) => {
       this.user = userData;
-      console.log('user', this.user);
+      // console.log('user', this.user);
       this.cachedScratchBoard = this.user.Notes;
     });
     // Get all users
@@ -105,8 +105,8 @@ export class DashboardUserIdea2Component implements OnInit, OnDestroy {
       .getUserJournals()
       .subscribe((journalData) => {
         this.userJournals = journalData;
-        console.log('user journals', this.userJournals);
-        console.log('journal data', journalData);
+        // console.log('user journals', this.userJournals);
+        // console.log('journal data', journalData);
       });
 
     this.subs.push(sub1);

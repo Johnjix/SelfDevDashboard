@@ -111,7 +111,7 @@ export class DashboardUserComponent implements OnInit {
         if (addMode) {
           // Add Task
           targetArray.push(newTask);
-          console.log('new task', newTask);
+          // console.log('new task', newTask);
         }
       },
       () => {
