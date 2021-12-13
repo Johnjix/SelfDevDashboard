@@ -164,10 +164,27 @@
         <div class="col">
           <div class="card">
             <div class="card-header">
-              <b>Users</b>
+              <div class="row">
+                <div class="col-2">
+                  <b>Users</b>
+                </div>
+                <div class="col">
+                  <input
+                    class="form-control"
+                    type="search"
+                    placeholder="Filter Users"
+                    [(ngModel)]="filterUsers"
+                  />
+                </div>
+              </div>
             </div>
             <ul class="list-group list-group-flush list-group-max-height">
-              <li *ngFor="let us of allUsers$ | async" class="list-group-item">
+              <li
+                *ngFor="
+                  let us of allUsers$ | async | strFilter: filterUsers:'Name'
+                "
+                class="list-group-item"
+              >
                 <i class="fas fa-user-graduate mr-1"></i>
                 <span>{{ us.Name }}</span>
               </li>

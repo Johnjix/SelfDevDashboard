@@ -20,6 +20,7 @@ export class DashboardUserIdea2Component implements OnInit, OnDestroy {
   userJournals: Journal[];
   subs: Subscription[];
   cachedScratchBoard: string;
+  filterUsers: string;
   // options
   showXAxis: boolean = true;
   showYAxis: boolean = true;
@@ -87,6 +88,7 @@ export class DashboardUserIdea2Component implements OnInit, OnDestroy {
     this.userJournals = [];
     this.subs = [];
     this.cachedScratchBoard = '';
+    this.filterUsers = '';
   }
 
   ngOnInit(): void {

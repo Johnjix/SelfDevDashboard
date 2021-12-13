@@ -30,6 +30,7 @@ import {
 import { UserAccountModalComponent } from './user-account-modal/user-account-modal.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { UpdateJournalEntryModalComponent } from './update-journal-entry-modal/update-journal-entry-modal.component';
+import { StrFilterPipe } from './pipes/str-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UpdateJournalEntryModalComponent } from './update-journal-entry-modal/u
     DashboardUserIdea2Component,
     UserAccountModalComponent,
     UpdateJournalEntryModalComponent,
+    StrFilterPipe,
   ],
   imports: [
     BrowserModule,
